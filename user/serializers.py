@@ -8,7 +8,7 @@ from . import models
 class AuthTokenSerializer(serializers.Serializer):
     """Serializer for the user authentication object"""
 
-    username = serializers.CharField()
+    email = serializers.CharField()
     password = serializers.CharField(
         style={'input_type': 'password'},
         trim_whitespace=False
@@ -17,11 +17,14 @@ class AuthTokenSerializer(serializers.Serializer):
     def validate(self, attrs):
         """Validate and authenticate the user"""
 
-        username = attrs.get('username'),
+        print(attrs.get('email'), attrs.get('password'))
+
+        email = attrs.get('email'),
         password = attrs.get('password')
+
         user = authenticate(
             request=self.context.get('request'),
-            username=username[0],
+            email=email[0],
             password=password
         )
 

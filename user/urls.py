@@ -10,4 +10,5 @@ router = DefaultRouter()
 urlpatterns = [
     path('', include(router.urls)),
     path('token/', views.CreateTokenView.as_view(), name='token'),
+    path('check-user/', views.check_user_status, name='check_user')
 ]
