@@ -60,4 +60,4 @@ class FIRStatus(models.Model):
         return f'{self.fir.fir_no}--{self.current_status}'
 
     class Meta:
-        verbose_name_plural = 'FIR Statuses'
+        verbose_name_plural = 'FIR Status'

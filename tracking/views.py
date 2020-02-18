@@ -15,6 +15,14 @@ class FIRViewset(viewsets.ModelViewSet):
     permission_classes_by_action = {'list': [AllowAny],
                                     'create': [AllowAny]}
 
+    def get_queryset(self):
+        ps = self.request.query_params.get('ps')
+
+        queryset = self.queryset
+        if ps:
+            return queryset.filter(police_station=int(ps))
+        return queryset
+
     # authentication_classes = (TokenAuthentication, )
 
     def get_permissions(self):

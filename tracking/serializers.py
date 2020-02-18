@@ -32,3 +32,13 @@ class FIRStatusSerializer(serializers.ModelSerializer):
         fields = ('id', 'fir',
                   'current_status', 'location', 'date_of_action', 'is_active')
         read_only_fields = ('id', )
+
+    def create(self, validated_data):
+
+        statuses = models.FIRStatus.objects.all().filter(
+            fir__pk__exact=self.data['fir'], is_active__exact=True)
+        for status in statuses:
+            status.is_active = False
+            status.save()
+        obj = models.FIRStatus.objects.create(**validated_data)
+        return obj
